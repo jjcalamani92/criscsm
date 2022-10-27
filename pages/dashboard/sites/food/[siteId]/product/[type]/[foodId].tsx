@@ -11,13 +11,9 @@ import { MealFood } from '../../../../../../../src/components'
 function FoodId() {
   const { asPath } = useRouter()
   const { data: food } = useProductFood(asPath)
-  // console.log(food);
-  // console.log(food);
   
   return (
     <Fragment>
-      {/* <h1>Hola</h1> */}
-      {/* <ProductWear product={product!} /> */}
       <MealFood meal={food!} />
     </Fragment>
   )

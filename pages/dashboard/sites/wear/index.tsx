@@ -9,6 +9,8 @@ import { LayoutDashboard } from '../../../../src/layouts'
 
 export default function Index() {
   const { data:sitesWear } = useSitesWear()
+  console.log(sitesWear);
+  
   const listWear = useMemo(() => sitesWear,
     [sitesWear])
   // console.log(sitesWear);
