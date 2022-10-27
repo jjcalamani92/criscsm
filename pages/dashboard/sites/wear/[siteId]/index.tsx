@@ -30,7 +30,7 @@ export default function Index() {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const sites = await findSitesWear()
-  console.log(sites);
+  // console.log(sites);
   
   return {
     // paths: [{ params: { siteId: "6324d2d5132d462bc1c57b55" } }],
@@ -44,7 +44,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
   const queryClient = new QueryClient()
   const siteId = context?.params?.siteId as string
   const parentId = context?.params?.siteId as string
-  console.log(context);
+  // console.log(context);
   
   await queryClient.prefetchQuery(["find-site-wear", siteId], async () => await findSiteWear(siteId))
   await queryClient.prefetchQuery(["find-pages0-wear-by-parent-id", parentId], async () => await findPages0WearByParentId(parentId))

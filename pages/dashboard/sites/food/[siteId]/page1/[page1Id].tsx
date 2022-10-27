@@ -40,6 +40,7 @@ function Page1() {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const pages1 = await findPages1Food()
+  console.log(pages1);
   
   return {
     paths: pages1.map(data => ({ params: { siteId: data.siteId, page1Id: data._id } })),

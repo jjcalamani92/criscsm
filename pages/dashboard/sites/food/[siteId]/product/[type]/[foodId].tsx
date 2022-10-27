@@ -25,7 +25,7 @@ function FoodId() {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const foods = await findAllProductsFood()
-  // console.log('foods', foods);
+  console.log('foods', foods);
   // console.log(foods);
   
   return {    

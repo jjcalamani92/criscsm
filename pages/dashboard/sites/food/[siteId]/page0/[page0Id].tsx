@@ -25,6 +25,8 @@ function Page0() {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const pages0 = await findPages0Food()
+  console.log(pages0);
+  
   return {
     paths: pages0.map(data => ({ params: { siteId: data.siteId, page0Id: data._id } })),
     fallback: 'blocking'

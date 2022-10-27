@@ -11,7 +11,8 @@ export default function Index() {
   const { data:sitesWear } = useSitesWear()
   const listWear = useMemo(() => sitesWear,
     [sitesWear])
-
+  // console.log(sitesWear);
+  
 
   return (
     <Fragment>
