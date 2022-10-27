@@ -13,15 +13,10 @@ interface CardSite {
   toggle: () => void
 }
 export const CardSite: FC<CardSite> = ({ site, checked, partiallySelected,  toggle }) => {
-  // const {push} = useRouter()
   const ref = useRef<HTMLDivElement>(null);
-  console.log(site);
   
   useLongPress(toggle, ref, {
     moveThreshold: { x: 5, y: 5 },
-    // onClick: (e) => { push(`/dashboard/sites/${site?._id}`); e.stopPropagation()}, 
-    // onClick: (e) => { push(`/dashboard/sites/${site?._id}`); e.stopPropagation()}, 
-    // onClick: (e) => console.log('click'), 
   }, );
   return (
     <div   className="group relative max-w-xs rounded-md shadow hover:shadow-2xl transition-all z-0  delay-150  bg-gray-100 text-gray-800">

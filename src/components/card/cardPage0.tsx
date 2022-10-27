@@ -14,7 +14,7 @@ interface CardPage0 {
 export const CardPage0: FC<CardPage0> = ({ page, checked, partiallySelected, toggle }) => {
   const { push, asPath } = useRouter()
   const query = getQuery(asPath)
-  console.log(query);
+  // console.log(query);
   
   const ref = useRef<HTMLDivElement>(null);
   useLongPress(toggle, ref, {

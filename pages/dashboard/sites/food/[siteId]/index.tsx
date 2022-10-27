@@ -17,7 +17,7 @@ export default function Index() {
   const { data: pages0 } = usePages0FoodByParentId(asPath)
   const list = useMemo(() => pages0,
     [pages0])
-  console.log(list);
+  // console.log(list);
   
   return (
     <Fragment>
