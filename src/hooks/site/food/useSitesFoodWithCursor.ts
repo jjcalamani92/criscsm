@@ -7,7 +7,7 @@ export const findSitesFoodWithCursor = async (args:ConnectionArgs) => {
   return listSitesWithCursor;
 };
 
-export function useSitesWithCursor(args:ConnectionArgs) {
+export function useSitesFoodWithCursor(args:ConnectionArgs) {
   
   return useQuery<ListResponse>(["find-sites-with-cursor", args], () => findSitesFoodWithCursor(args));
 }

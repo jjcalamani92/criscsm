@@ -1,15 +1,14 @@
-import { Promotion } from "./product.interface"
-import { Image, Seo, Site } from "./site.interface"
+import { Promotion } from "../product.interface"
+import { Image, Seo, Site } from "../site.interface"
 
 export interface Food {
   _id: string
   data: DataFood
-  site: string
-  parent: string
-  type: string
-  page: string
+  siteId: string
+  parentId: string
 }
 export interface DataFood {
+  type: string
   name: string;
   slug: string;
   price: number;
@@ -30,10 +29,9 @@ export interface CreateFood {
     promotion: string
     price: number
     discountPrice: number
-    site: string
-    parent: string
+    siteId: string
+    parentId: string
     uid: string
-    change: string
   }
   type: string
 }
@@ -46,9 +44,8 @@ export interface UpdateFood {
     price: number
     discountPrice: number
     uid: string
-    change: string
-    site: string
-    parent: string
+    siteId: string
+    parentId: string
   }
   type: string
 }

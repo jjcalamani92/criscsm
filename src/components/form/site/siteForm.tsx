@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react';
 
 import Swal from 'sweetalert2';
 import { Site } from '../../../../interfaces';
-import { useCreateSiteFood, useUpdateSiteFood } from '../../../hooks';
+import { useCreateSiteFood, useCreateSiteWear, useUpdateSiteFood, useUpdateSiteWear } from '../../../hooks';
 
 interface SiteForm {
   toggle: () => void,
@@ -24,11 +24,13 @@ interface FormValues {
 export const SiteForm: FC<SiteForm> = ({ toggle, site, setLeft }) => {
   const { asPath, replace } = useRouter()
   const query = getQuery(asPath)
-  // console.log(site);
+  console.log('Wear');
 
   // const { mutate: createSite } = useCreateSite()
   const { mutate: createSiteFood } = useCreateSiteFood()
+  const { mutate: createSiteWear } = useCreateSiteWear()
   const { mutate: updateSiteFood } = useUpdateSiteFood()
+  const { mutate: updateSiteWear } = useUpdateSiteWear()
   const { data: session } = useSession()
   const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormValues>({ mode: "onChange", defaultValues: site ? { name: site?.data.name, domain: site?.url, description: site?.data.description, type: site?.data.type, client: site.client } : {name: "", domain: ".vercel.app", description: "site description", type: query[2], client: "Jesus Calamani"} });
 
@@ -37,10 +39,11 @@ export const SiteForm: FC<SiteForm> = ({ toggle, site, setLeft }) => {
     const {client, ...updateForm} = form;
     const createForm = { ...form, client: data.client?.trim() }
     if (site) {
-      updateSiteFood({ id: site._id, input: updateForm })
+      if (query[2] === 'food') { updateSiteFood({ id: site._id, input: updateForm }) }
+      if (query[2] === 'wear') { updateSiteWear({ id: site._id, input: updateForm }) }
     } else {
-      createSiteFood( {input: createForm})
-      // console.log(createForm);
+      if (query[2] === 'food') { createSiteFood( {input: createForm}) }
+      if (query[2] === 'wear') { createSiteWear( {input: createForm}) }
     }
     toggle()
   }
@@ -51,13 +54,7 @@ export const SiteForm: FC<SiteForm> = ({ toggle, site, setLeft }) => {
       <form onSubmit={handleSubmit(onSubmit)} method="POST" className='h-full'>
         <div className=" sm:rounded-md px-2">
           <div className="p-2 ">
-            {/* <div className="text-center sm:mt-0 sm:text-left">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">
-                {
-                  site ? 'Update Site' : 'New Site'
-                }
-              </h3>
-            </div> */}
+            
             <div className="grid grid-cols-6 gap-6">
               <div className="col-span-6">
                 <label

@@ -12,8 +12,7 @@ import { DataProduct, Food, ImageProduct, Product } from '../../../../interfaces
 
 
 import { getQuery, uuidv3 } from '../../../../utils/function';
-import { useUpdateFoodImage } from '../../../hooks';
-import { useUpdateProductImage } from '../../../hooks/product/useUpdateProductImage';
+import { useUpdateProductFoodImage } from '../../../hooks';
 
 
 interface FormValues {
@@ -28,11 +27,13 @@ interface ImageFormFood {
   image?: ImageProduct[]
 }
 export const ImageFormFood: FC<ImageFormFood> = ({ toggle, setLeft, meal, image }) => {
+  console.log(meal);
+  
   // console.log('https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,b_rgb:f5f5f5/2ffbfb8a-7fcc-48cd-acf9-66a50ce25179/dri-fit-womens-tee-SK5XzW.png'.length)
   // console.log('http://www.polloscopacabana.com/images/products/i_ref-combos-web-pacenisimo.jpg'.length);
   // console.log('https://d33wubrfki0l68.cloudfront.net/e45cab36a97b0b21f45d631815cc41cb84c92f6e/66855/rocketech-logo.eac89356.svg'.length);
-  
-  
+
+
   const { data: session } = useSession()
   // console.log(meal);
 
@@ -40,7 +41,7 @@ export const ImageFormFood: FC<ImageFormFood> = ({ toggle, setLeft, meal, image 
   const query = getQuery(asPath)
 
   const { register, handleSubmit, formState: { errors }, getValues, setValue, watch } = useForm<FormValues>({ defaultValues: { ...meal } });
-  const { mutate: updateFoodImage } = useUpdateFoodImage()
+  const { mutate: updateProductFoodImage } = useUpdateProductFoodImage()
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
 
@@ -54,15 +55,17 @@ export const ImageFormFood: FC<ImageFormFood> = ({ toggle, setLeft, meal, image 
         const formData = new FormData();
         formData.append('file', file)
         formData.append('parentId', meal?._id!)
-        formData.append('siteId', query[2])
-        formData.append('type', `products-${meal?.type}`)
+        formData.append('siteId', query[3])
+        formData.append('type', `products-${meal?.data.type}`)
 
         const { data } = await axios.post(`${process.env.API_URL}/upload/file`, formData)
         setValue('data.image', [...getValues('data.image'), { uid: uuidv3(), src: data.url, alt: `description image of the ${meal?.data.name}` }], { shouldValidate: true })
-        updateFoodImage({ id: meal?._id!, input: getValues('data.image'), type: meal?.type!, uid: session?.user.sid! })
+        updateProductFoodImage({ id: meal?._id!, inputImage: getValues('data.image'), type: meal?.data.type!, uid: session?.user.sid! })
 
       }
     } catch (error) {
+      // console.log(error);
+      
       const err = error as AxiosError
       const { message } = err.response?.data as { message: string }
       Swal.fire({
@@ -78,9 +81,9 @@ export const ImageFormFood: FC<ImageFormFood> = ({ toggle, setLeft, meal, image 
 
   const deleteImage = async (src: string) => {
     setValue('data.image', getValues('data.image').filter(data => data.src !== src), { shouldValidate: true })
-    updateFoodImage({ id: meal?._id!, input: getValues('data.image'), type: meal?.type!, uid: session?.user.sid! })
+    updateProductFoodImage({ id: meal?._id!, inputImage: getValues('data.image'), type: meal?.data.type!, uid: session?.user.sid! })
     const url = src.split('/').at(-1)?.split('.').at(-2)
-    await axios.post(`${process.env.API_URL}/upload/delete`, { name: url, type: `products-${meal?.type}` })
+    await axios.post(`${process.env.API_URL}/upload/delete`, { name: url, type: `products-${meal?.data.type}` })
   }
 
   const uploadURL = async () => {
@@ -89,20 +92,29 @@ export const ImageFormFood: FC<ImageFormFood> = ({ toggle, setLeft, meal, image 
       // inputAutoTrim: true,
       inputLabel: 'URL Image',
       inputPlaceholder: 'Enter the URL',
-      
+      // customClass: {
+      //   validationMessage: 'my-validation-message'
+      // },
       inputAttributes: {
         autocomplete: 'off',
       },
+      // preConfirm: (value) => {
+      //   if (!value) {
+      //     Swal.showValidationMessage(
+      //       '<i class="fa fa-info-circle"></i> You can not use the images of this site by url download them'
+      //     )
+      //   }
+      // }
     })
     if (url) {
-      
+
       try {
-        const { data } = await axios.post(`${process.env.API_URL}/upload/file-url`, {file: url, siteId: query[2], parentId: meal?._id, type: `products-${meal?.type}`})
+        const { data } = await axios.post(`${process.env.API_URL}/upload/file-url`, { file: url, siteId: query[3], parentId: meal?._id, type: `products-${meal?.data.type}` })
         setValue('data.image', [...getValues('data.image'), { uid: uuidv3(), src: data.url, alt: `description image of the ${meal?.data.name}` }], { shouldValidate: true })
-        updateFoodImage({ id: meal?._id!, input: getValues('data.image'), type: meal?.type!, uid: session?.user.sid! })
-        
+        updateProductFoodImage({ id: meal?._id!, inputImage: getValues('data.image'), type: meal?.data.type!, uid: session?.user.sid! })
+
       } catch (error) {
-        
+
         const err = error as AxiosError
         const { message } = err.response?.data as { message: string }
         Swal.fire({
@@ -114,7 +126,7 @@ export const ImageFormFood: FC<ImageFormFood> = ({ toggle, setLeft, meal, image 
       }
     }
 
-  } 
+  }
 
   return (
     <div className="mt-5 md:col-span-2 md:mt-0">

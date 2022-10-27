@@ -41,7 +41,7 @@ export const FIND_PAGES_0_FOOD = gql`
   }
 `;
 export const FIND_PAGE_0_FOOD = gql`
-  query FindPage0Food($id:ID!) {
+  query FindPage0Food($id:String!) {
     findPage0Food(id:$id) {
       _id
       siteId

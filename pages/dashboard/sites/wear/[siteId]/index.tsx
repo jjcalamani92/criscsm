@@ -15,9 +15,6 @@ export default function Index() {
   const { data: site } = useSiteWear(asPath);
   
   const { data: pages0 } = usePages0WearByParentId(asPath)
-  console.log(pages0);
-  // console.log(asPath);
-  
   const list = useMemo(() => pages0,
     [pages0])
   // console.log(site);

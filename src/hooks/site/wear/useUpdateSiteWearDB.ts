@@ -1,27 +1,26 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-import { DELETE_SITE, graphQLClient, UPDATE_FOOD, UPDATE_SITE } from "../../../graphql";
-import { Food, Site, UpdateFood, UpdateProduct, UpdateSite } from "../../../interfaces";
+import { DELETE_SITE, graphQLClient, UPDATE_SITE, UPDATE_SITE_DB, UPDATE_SITE_WEAR_DB } from "../../../../graphql";
+import { Site, UpdateSiteDB } from "../../../../interfaces";
 
 
-export const useUpdateFood = () => {
+export const useUpdateSiteDataBaseWear = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async ({id, input, type}:UpdateFood) => {
-      const { updateFood } = await graphQLClient.request<{ updateFood: Food }>(UPDATE_FOOD, {
+    async ({id, inputDB}:UpdateSiteDB) => {
+      const { updateDataBaseWear } = await graphQLClient.request<{updateDataBaseWear: Site}>(UPDATE_SITE_WEAR_DB, {
         id,
-        input,
-        type
+        inputDB
       });
-      return updateFood;
+      return updateDataBaseWear;
     },
     {
-      onSuccess: async (updateFood, {id, input, type}) => {
-        queryClient.setQueryData(['find-food', id, type], updateFood);
+      onSuccess: async (updateDataBaseWear, {id}) => {
+        queryClient.setQueryData(['find-site-wear', id], updateDataBaseWear);
         Swal.fire({
           position: "center",
           icon: "success",
-          title: "Updated Food",
+          title: "Updated DB Site",
           showConfirmButton: false,
           timer: 1000,
         });

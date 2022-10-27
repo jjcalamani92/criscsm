@@ -9,3 +9,5 @@ export * from './useProduct'
 export * from './useProductsByParent'
 export * from './useUpdateProduct'
 export * from './useUpdateProductImage'
+
+export * from './food'

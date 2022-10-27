@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 import { CREATE_SITE, CREATE_SITE_FOOD, DELETE_SITE, graphQLClient, UPDATE_SITE } from "../../../../graphql";
 import { CreateSite, Site, UpdateSite } from "../../../../interfaces";
+import { Toast } from "../../../../utils";
 
 
 export const useCreateSiteFood = () => {
@@ -16,13 +17,17 @@ export const useCreateSiteFood = () => {
     {
       onSuccess: async (createSite) => {
         queryClient.setQueryData<Site[]>(['find-sites-food'], (old) => [...old!, createSite]);
-        Swal.fire({
+        await Swal.fire({
           position: "center",
           icon: "success",
           title: "Created Site",
           showConfirmButton: false,
           timer: 1000,
         });
+        // await Toast.fire({
+        //   icon: 'success',
+        //   title: 'Success'
+        // })
       },
       onError: (error: { response: { errors: [{ message: string }] } }) => {
         Swal.fire({

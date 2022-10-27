@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
-export const FIND_SITES_WITH_CURSOR = gql`
-  query ListSitesWithCursor($args: ConnectionArgs!) {
-    listSitesWithCursor(args: $args) {
+export const FIND_SITES_WEAR_WITH_CURSOR = gql`
+  query ListSitesWearWithCursor($args: ConnectionArgs!) {
+    listSitesWearWithCursor(args: $args) {
       pageData {
         count
         limit
@@ -54,7 +54,7 @@ export const FIND_SITES_WEAR = gql`
 `;
 
 export const FIND_SITE_WEAR = gql`
-  query FindSiteWear($id: ID!) {
+  query FindSiteWear($id: String!) {
     findSiteWear(id: $id) {
       _id
       data {
@@ -70,6 +70,20 @@ export const FIND_SITE_WEAR = gql`
           label
           value
         }
+        siteImages {
+          banner {
+            src
+            alt
+          }
+          logo {
+            src
+            alt
+          }
+          icon {
+            src
+            alt
+          }
+        }
         
       }
       url
@@ -77,7 +91,7 @@ export const FIND_SITE_WEAR = gql`
   }
 `;
 export const FIND_SITE_WEAR_BY_LAYOUT = gql`
-  query FindSiteWear($id: ID!) {
+  query FindSiteWear($id: String!) {
     findSiteWear(id: $id) {
       _id
       data {
@@ -88,40 +102,10 @@ export const FIND_SITE_WEAR_BY_LAYOUT = gql`
           description
         }
 
-        image {
-          src
-          alt
-        }
-        logo {
-          src
-          alt
-        }
-        icon {
-          src
-          alt
-        }
+        
       }
       url
-      page {
-        _id
-        data {
-          type
-          seo {
-            title
-            href
-          }
-        }
-        page {
-          _id
-          data {
-            type
-            seo {
-              title
-              href
-            }
-          }
-        }
-      }
+      
     }
   }
 `;

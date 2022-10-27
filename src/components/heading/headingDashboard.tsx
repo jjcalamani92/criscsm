@@ -15,18 +15,15 @@ import { Menu, Transition } from '@headlessui/react'
 import { classNames, getQuery } from '../../../utils/function'
 import { useRouter } from 'next/router'
 import { Food, Page, Product, Site } from '../../../interfaces'
-import { Modal } from '../utils'
 import { TabFormFood, TabFormPage, TabFormProduct, TabFormSite } from '../tabs'
 import { typePageEcommerceCategory, typePageFoodCategory, typeSite } from '../../../utils'
 import { Text } from '../polymorphic'
-import { CubeIcon, FolderPlusIcon, SquaresPlusIcon, TrashIcon } from '@heroicons/react/24/outline'
+import { CubeIcon, FolderPlusIcon, TrashIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { useDeleteManyProductById } from '../../hooks'
 import Swal from 'sweetalert2'
 import { useToggle } from 'ahooks'
 import { SlideOversForm } from '../tailwindComponents'
-
-
 
 interface HeadingDashboard {
   title: string

@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { Card } from "./card";
 import Link from "next/link";
 import { Image } from "../utils";
+import { getQuery } from '../../../utils/function';
 
 interface CardFood {
   food?: Food
@@ -13,7 +14,8 @@ interface CardFood {
   toggle: () => void
 }
 export const CardFood: FC<CardFood> = ({ food, checked, partiallySelected,  toggle }) => {
-  const {push} = useRouter()
+  const {push, asPath} = useRouter()
+  const query = getQuery(asPath)
   const ref = useRef<HTMLDivElement>(null);
   useLongPress(toggle, ref, {
     moveThreshold: { x: 5, y: 5 },
@@ -35,7 +37,7 @@ export const CardFood: FC<CardFood> = ({ food, checked, partiallySelected,  togg
         <Image img={food?.data.seo.image!} className="h-[12rem] w-full object-cover"/>
 
         
-        <Link href={`/dashboard/sites/${food?.site}/meal/${food?.type}/${food?._id}`}>
+        <Link href={`/dashboard/sites/${query[2]}/${food?.siteId}/product/${food?.data.type}/${food?._id}`}>
         <a className="flex items-center h-[3rem] mx-2 cursor-pointer"> 
           <h2 className=" text-sm tracking-wide truncate">{food?.data.seo.title}</h2>
         </a>

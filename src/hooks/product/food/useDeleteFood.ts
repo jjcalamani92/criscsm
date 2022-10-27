@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { CREATE_PRODUCT,  DELETE_FOOD,  DELETE_PRODUCT,  graphQLClient } from "../../../graphql";
-import { CreateProduct, CreateSite, DeleteProduct, Food, Product, Site, DeleteFood } from "../../../interfaces";
+import { CREATE_PRODUCT,  DELETE_FOOD,  DELETE_PRODUCT,  graphQLClient } from "../../../../graphql";
+import { CreateProduct, CreateSite, DeleteProduct, Food, Product, Site, DeleteFood } from "../../../../interfaces";
 
 
 export const useDeleteFood = (parentId: string) => {

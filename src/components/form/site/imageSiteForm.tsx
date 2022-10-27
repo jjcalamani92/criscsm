@@ -43,19 +43,11 @@ interface ImageSiteForm {
 }
 export const ImageSiteForm: FC<ImageSiteForm> = ({ toggle, setLeft, site, image }) => {
   const { data: session } = useSession()
-  // console.log('data', site?.data.icon);
   const [type, setType] = useState('')
 
   const { asPath, replace } = useRouter()
   const query = getQuery(asPath)
-  // console.log(query.at(-2));
-  // "https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg"
   const { register, handleSubmit, formState: { errors }, getValues, setValue, watch } = useForm<FormValues>({ defaultValues: { logo:  {src: site?.data.siteImages.logo?.src} , site: { src: site?.data.siteImages.banner?.src }, icon: { src: site?.data.siteImages.icon?.src } } });
-  // console.log(getValues('icon')?.src.split('/').at(-1)?.split('.').at(-2));
-  // console.log(getValues('logo')?.src.split('/').at(-1)?.split('.').at(-2));
-  // console.log(getValues('site')?.src.split('/').at(-1)?.split('.').at(-2));
-  
-  // const {mutate: updateProductImage} = useUpdateProductImage()
 
   const { mutate: updateSiteFoodImage } = useUpdateSiteFoodImage()
 
@@ -74,13 +66,6 @@ export const ImageSiteForm: FC<ImageSiteForm> = ({ toggle, setLeft, site, image 
         formData.append('parentId', query[3])
         formData.append('siteId', query[3])
         formData.append('type', "site")
-
-        
-        
-        
-
-        
-        
         const { data } = await axios.post(`${process.env.API_URL}/upload/file`, formData)
         
         setValue('input', { src: data.url, alt: `description image of the ${site?.data.name}` }, { shouldValidate: true })

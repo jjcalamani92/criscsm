@@ -18,234 +18,34 @@ import { Bars3Icon, BuildingStorefrontIcon, MagnifyingGlassIcon, ShoppingBagIcon
 import { classNames, getPathByLayout } from '../../../utils'
 import { useToggle } from 'ahooks'
 import { useRouter } from 'next/router';
-import { useSiteByLayout } from '../../hooks'
+import { useSiteFoodByLayout } from '../../hooks'
 
-// const categories = [
-//   {
-//     id: 'menu',
-//     name: 'Menú',
-//     children: [
-//       {
-//         name: 'Pollo', href: '/dashboard/projects/6324d2d5132d462bc1c57b55/woman/tops', items: [
-//           {
-//             name: 'Balde copacabana 12 presas',
-//             href: '#',
-//             imageSrc: 'http://www.polloscopacabana.com/images/products/i_balde-12.jpg',
-//             imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-//           },
-//           {
-//             name: 'Balde copacabana 8 presas',
-//             href: '#',
-//             imageSrc: 'http://www.polloscopacabana.com/images/products/i_balde-8.jpg',
-//             imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-//           },
-//           {
-//             name: 'Balde alitas',
-//             href: '#',
-//             imageSrc: 'http://www.polloscopacabana.com/images/products/i_balde-alitas.jpg',
-//             imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-//           },
-//           {
-//             name: 'Combo especial',
-//             href: '#',
-//             imageSrc: 'http://www.polloscopacabana.com/images/products/i_comboespecial.jpg',
-//             imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-//           },
-//           {
-//             name: 'Combo Trío',
-//             href: '#',
-//             imageSrc: 'http://www.polloscopacabana.com/images/products/i_trio.jpg',
-//             imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-//           },]
-//       },
-//       {
-//         name: 'Hamburguesa', href: '#', items: [
-//           {
-//             name: 'Balde copacabana 12 presas',
-//             href: '#',
-//             imageSrc: 'http://www.polloscopacabana.com/images/products/i_balde-12.jpg',
-//             imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-//           },
-//           {
-//             name: 'Balde copacabana 8 presas',
-//             href: '#',
-//             imageSrc: 'http://www.polloscopacabana.com/images/products/i_balde-8.jpg',
-//             imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-//           },
-//           {
-//             name: 'Combo especial',
-//             href: '#',
-//             imageSrc: 'http://www.polloscopacabana.com/images/products/i_comboespecial.jpg',
-//             imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-//           },
-//           {
-//             name: 'Balde alitas',
-//             href: '#',
-//             imageSrc: 'http://www.polloscopacabana.com/images/products/i_balde-alitas.jpg',
-//             imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-//           },
-//           {
-//             name: 'Combo Trío',
-//             href: '#',
-//             imageSrc: 'http://www.polloscopacabana.com/images/products/i_trio.jpg',
-//             imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-//           },]
-//       },
-//       { name: 'Ensaladas', href: '#', items: [] },
-//       { name: 'Extras', href: '#', items: [] },
-//       { name: 'Cafetería y pastelería', href: '#', items: [] }
-//     ],
-
-//   },
-// ]
-
-const navigation = {
-  categories: [
-    {
-      id: 'menu',
-      name: 'Menú',
-      featured: [
-        {
-          name: 'Balde copacabana 12 presas',
-          href: '#',
-          imageSrc: 'http://www.polloscopacabana.com/images/products/i_balde-12.jpg',
-          imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-        },
-        {
-          name: 'Balde copacabana 8 presas',
-          href: '#',
-          imageSrc: 'http://www.polloscopacabana.com/images/products/i_balde-8.jpg',
-          imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-        },
-        {
-          name: 'Balde copacabana 12 presas',
-          href: '#',
-          imageSrc: 'http://www.polloscopacabana.com/images/products/i_balde-12.jpg',
-          imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-        },
-        {
-          name: 'Balde copacabana 8 presas',
-          href: '#',
-          imageSrc: 'http://www.polloscopacabana.com/images/products/i_balde-8.jpg',
-          imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-        },
-        {
-          name: 'Balde alitas',
-          href: '#',
-          imageSrc: 'http://www.polloscopacabana.com/images/products/i_balde-alitas.jpg',
-          imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-        },
-        {
-          name: 'Combo especial',
-          href: '#',
-          imageSrc: 'http://www.polloscopacabana.com/images/products/i_comboespecial.jpg',
-          imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-        },
-        {
-          name: 'Combo Trío',
-          href: '#',
-          imageSrc: 'http://www.polloscopacabana.com/images/products/i_trio.jpg',
-          imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-        },
-
-      ],
-      categories: [
-        {
-          name: 'Pollo', href: '/dashboard/projects/6324d2d5132d462bc1c57b55/woman/tops', items: [{
-            name: 'Balde copacabana 12 presas',
-            href: '#',
-            imageSrc: 'http://www.polloscopacabana.com/images/products/i_balde-12.jpg',
-            imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-          },
-          {
-            name: 'Balde copacabana 8 presas',
-            href: '#',
-            imageSrc: 'http://www.polloscopacabana.com/images/products/i_balde-8.jpg',
-            imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-          },
-          {
-            name: 'Balde copacabana 12 presas',
-            href: '#',
-            imageSrc: 'http://www.polloscopacabana.com/images/products/i_balde-12.jpg',
-            imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-          },
-          {
-            name: 'Balde copacabana 8 presas',
-            href: '#',
-            imageSrc: 'http://www.polloscopacabana.com/images/products/i_balde-8.jpg',
-            imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
-          },
-          {
-            name: 'Balde alitas',
-            href: '#',
-            imageSrc: 'http://www.polloscopacabana.com/images/products/i_balde-alitas.jpg',
-            imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-          },
-          {
-            name: 'Combo especial',
-            href: '#',
-            imageSrc: 'http://www.polloscopacabana.com/images/products/i_comboespecial.jpg',
-            imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-          },
-          {
-            name: 'Combo Trío',
-            href: '#',
-            imageSrc: 'http://www.polloscopacabana.com/images/products/i_trio.jpg',
-            imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-          },]
-        },
-        { name: 'Hamburguesa', href: '#', items: [] },
-        { name: 'Ensaladas', href: '#', items: [] },
-        { name: 'Extras', href: '#', items: [] },
-        { name: 'Cafetería y pastelería', href: '#', items: [] }
-      ],
-      // sections: [
-      //   {
-      //     id: 'menu',
-      //     name: 'Menú',
-      //     items: [
-      //       { name: 'Pollo', href: '/dashboard/projects/6324d2d5132d462bc1c57b55/woman/tops' },
-      //       { name: 'Hamburguesa', href: '#' },
-      //       { name: 'Ensaladas', href: '#' },
-      //       { name: 'Extras', href: '#' },
-      //       { name: 'Cafetería y pastelería', href: '#' }
-      //     ],
-      //   },
-      //   {
-      //     id: 'pollo',
-      //     name: 'Pollo',
-      //     items: []
-      //   }
-
-      // ],
-    },
-
-  ],
-  pages: [
-  ],
-}
+const pages= [
+  { name: 'Company', href: '#' },
+  { name: 'Stores', href: '#' },
+]
 
 interface HeaderFood {
   toggleShoppingCarts: () => void
 }
 
 export const HeaderFood: FC<HeaderFood> = ({ toggleShoppingCarts }) => {
-  const {asPath} = useRouter()
+  const { asPath } = useRouter()
   // console.log(item);
-  
+
   const [state, { toggle, setLeft, setRight }] = useToggle();
 
-  const { data: site } = useSiteByLayout(asPath);
-  // console.log(site);
+  const { data: site } = useSiteFoodByLayout(asPath);
 
   const list = useMemo(() => site,
   [site])
+
   const categories = getPathByLayout(list!)
-  const [item, setItem] = useState(categories[1].children[0].items)
   
+  const [item, setItem] = useState(categories[1].children[0].items)
+
   return (
     <div className="bg-white">
-      {/* Mobile menu */}
       <Transition.Root show={state} as={Fragment}>
         <Dialog as="div" className="relative z-40 lg:hidden" onClose={toggle}>
           <Transition.Child
@@ -282,11 +82,11 @@ export const HeaderFood: FC<HeaderFood> = ({ toggleShoppingCarts }) => {
                   </button>
                 </div>
 
-                {/* Links */}
+
                 <Tab.Group as="div" className="mt-2">
                   <div className="border-b border-gray-200">
                     <Tab.List className="-mb-px flex space-x-8 px-4">
-                      {categories.map((data, i) => data.name !=='Home' && (
+                      {categories.map((data, i) => data.name !== 'Home' && (
                         <Tab
                           key={i}
                           className={({ selected }) =>
@@ -309,7 +109,7 @@ export const HeaderFood: FC<HeaderFood> = ({ toggleShoppingCarts }) => {
                           // aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
                           className=" grid grid-cols-2 gap-3"
                         >
-                          {category.children.map((data, i) =>  (
+                          {category.children.map((data, i) => (
                             <li key={i} className="flow-root" onClick={() => setItem(data.items)}>
                               <div className="-m-2 block p-2 text-gray-500 tracking-wide truncate">
                                 {data.name}
@@ -339,15 +139,15 @@ export const HeaderFood: FC<HeaderFood> = ({ toggleShoppingCarts }) => {
                   </Tab.Panels>
                 </Tab.Group>
 
-                {/* <div className="space-y-6 border-t border-gray-200 py-6 px-4">
-                  {navigation.pages.map((page) => (
+                <div className="space-y-6 border-t border-gray-200 py-6 px-4">
+                  {pages.map((page) => (
                     <div key={page.name} className="flow-root">
                       <a href={page.href} className="-m-2 block p-2 font-medium text-gray-900">
                         {page.name}
                       </a>
                     </div>
                   ))}
-                </div> */}
+                </div> 
 
                 <div className="space-y-6 border-t border-gray-200 py-6 px-4">
                   <div className="flow-root">
@@ -378,6 +178,7 @@ export const HeaderFood: FC<HeaderFood> = ({ toggleShoppingCarts }) => {
           </div>
         </Dialog>
       </Transition.Root>
+              
 
       <header className="relative bg-white">
         <p className="flex h-10 items-center justify-center bg-red-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
@@ -396,7 +197,6 @@ export const HeaderFood: FC<HeaderFood> = ({ toggleShoppingCarts }) => {
                 <Bars3Icon className="h-6 w-6" aria-hidden="true" />
               </button>
 
-              {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
                 <a href="#">
                   <span className="sr-only">Your Company</span>
@@ -404,10 +204,9 @@ export const HeaderFood: FC<HeaderFood> = ({ toggleShoppingCarts }) => {
                 </a>
               </div>
 
-              {/* Flyout menus */}
               <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch z-10">
                 <div className="flex h-full space-x-8">
-                  {categories.map((data) => data.name !=='Home' &&  (
+                  {categories.map((data) => data.name !== 'Home' && (
                     <Popover key={data.name} className="flex">
                       {({ open }) => (
                         <>
@@ -444,8 +243,8 @@ export const HeaderFood: FC<HeaderFood> = ({ toggleShoppingCarts }) => {
                                         <div key={i} className="group relative text-base sm:text-sm">
                                           <div className="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg bg-gray-100 group-hover:opacity-75">
                                             <img
-                                              src={item.imageSrc}
-                                              alt={item.imageAlt}
+                                              src={item.imageSrc || "https:/res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg"}
+                                              alt={item.imageAlt || 'image description'}
                                               className="object-cover object-center"
                                             />
                                           </div>
@@ -484,7 +283,7 @@ export const HeaderFood: FC<HeaderFood> = ({ toggleShoppingCarts }) => {
                     </Popover>
                   ))}
 
-                  {/* {navigation.pages.map((page) => (
+                  {pages.map((page) => (
                     <a
                       key={page.name}
                       href={page.href}
@@ -492,7 +291,7 @@ export const HeaderFood: FC<HeaderFood> = ({ toggleShoppingCarts }) => {
                     >
                       {page.name}
                     </a>
-                  ))} */}
+                  ))}
                 </div>
               </Popover.Group>
 
@@ -519,7 +318,6 @@ export const HeaderFood: FC<HeaderFood> = ({ toggleShoppingCarts }) => {
                   </a>
                 </div>
 
-                {/* Search */}
                 <div className="flex lg:ml-6">
                   <a href="#" className="p-2 text-gray-400 hover:text-gray-500">
                     <span className="sr-only">Search</span>
@@ -527,7 +325,7 @@ export const HeaderFood: FC<HeaderFood> = ({ toggleShoppingCarts }) => {
                   </a>
                 </div>
 
-                {/* Cart */}
+
                 <div className="ml-4 flow-root lg:ml-6">
                   <div className="group -m-2 flex items-center p-2"
                     onClick={toggleShoppingCarts}>
@@ -543,7 +341,7 @@ export const HeaderFood: FC<HeaderFood> = ({ toggleShoppingCarts }) => {
             </div>
           </div>
         </nav>
-      </header>
+        </header>
     </div>
   )
 }

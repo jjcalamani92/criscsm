@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { FC } from 'react'
 import Swal from 'sweetalert2'
 import { getQuery, typePageEcommerceCategory, typePageFoodCategory } from '../../../utils'
-import { useDeletePages0, useDeleteSitesFood, useDeletePages1, useDeletePages2, useDeletePages3, useDeleteProducts, useDeleteFoods, useDeletePages0Food, useDeletePages1Food } from '../../hooks'
+import { useDeleteSitesFood, useDeletePages2, useDeletePages3, useDeleteProducts, useDeleteFoods, useDeletePages0Food, useDeletePages1Food, useDeleteSitesWear } from '../../hooks'
 
 interface HeadingDashboardOption {
   checked: boolean
@@ -16,8 +16,10 @@ interface HeadingDashboardOption {
 export const HeadingDashboardOption: FC<HeadingDashboardOption> = ({ checked, toggleAll, unSelectAll, selected, type }) => {
   const { asPath } = useRouter()
   const query = getQuery(asPath)
-
+  // console.log(type);
+  
   const { mutate: deleteSitesFood } = useDeleteSitesFood()
+  const { mutate: deleteSitesWear } = useDeleteSitesWear()
   const { mutate: deletePages0Food } = useDeletePages0Food(query[3])
   const { mutate: deletePages1Food } = useDeletePages1Food(query[5])
   const { mutate: deletePages2 } = useDeletePages2(query[5])
@@ -36,7 +38,8 @@ export const HeadingDashboardOption: FC<HeadingDashboardOption> = ({ checked, to
     }).then(async (result) => {
       if (result.isConfirmed) {
         
-        if (query.length === 3) { deleteSitesFood({ ids: selected }) }
+        if (query.length === 3 && query[2] === 'food') { deleteSitesFood({ ids: selected }) }
+        if (query.length === 3 && query[2] === 'wear') { deleteSitesWear({ ids: selected }) }
 
         if (query.length === 4) { deletePages0Food({ ids: selected }) }
 

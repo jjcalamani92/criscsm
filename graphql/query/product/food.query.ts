@@ -1,8 +1,8 @@
 import { gql } from "graphql-request";
 
 export const FIND_FOODS_WITH_CURSOR = gql`
-  query ListFoodWithCursor($args: ConnectionArgs!, $type: String!, $siteId: String!) {
-    listFoodWithCursor(args: $args, type: $type, siteId: $siteId) {
+  query ListProductFoodWithCursor($args: ConnectionArgs!, $type: String!, $siteId: String!) {
+    listProductFoodWithCursor(args: $args, type: $type, siteId: $siteId) {
       pageData {
         count
         limit
@@ -13,8 +13,8 @@ export const FIND_FOODS_WITH_CURSOR = gql`
           cursor
           node {
             _id
-            site
-            parent
+            siteId
+            parentId
             type
             data {
               name
@@ -49,8 +49,8 @@ export const FIND_FOODS_WITH_CURSOR = gql`
   }
 `;
 export const FIND_FOODS_BY_PARENT = gql`
-  query FindFoodsByParent($parentId: String!, $type: String!) {
-    findFoodsByParent(parentId: $parentId, type: $type) {
+  query FindProductsFoodByParent($parentId: String!, $type: String!) {
+    findProductsFoodByParent(parentId: $parentId, type: $type) {
       _id
       data {
         name
@@ -63,13 +63,13 @@ export const FIND_FOODS_BY_PARENT = gql`
   }
 `;
 export const FIND_ALL_FOODS_BY_PARENT = gql`
-  query FindAllFoodsByParent($parentId: String!) {
-    findAllFoodsByParent(parentId: $parentId) {
+  query FindAllProductsFoodByParent($parentId: String!) {
+    findAllProductsFoodByParent(parentId: $parentId) {
       _id
-      site
-      parent
-      type
+      siteId
+      parentId
       data {
+        type
         name
         slug
         price
@@ -93,12 +93,12 @@ export const FIND_ALL_FOODS_BY_PARENT = gql`
   }
 `;
 export const FIND_ALL_FOODS = gql`
-  query FindAllFoods {
-    findAllFoods {
+  query FindAllProductsFood {
+    findAllProductsFood {
       _id
-      site
-      type
+      siteId
       data {
+        type
         seo {
           title
           description
@@ -108,12 +108,12 @@ export const FIND_ALL_FOODS = gql`
   }
 `;
 export const FIND_FOOD = gql`
-  query FindFood($id: ID!, $type: String!) {
-    findFood(id: $id, type: $type) {
+  query FindProductFood($id: String!, $type: String!) {
+    findProductFood(id: $id, type: $type) {
       _id
-      type
-      parent
+      parentId
       data {
+        type
         name
         slug
         price

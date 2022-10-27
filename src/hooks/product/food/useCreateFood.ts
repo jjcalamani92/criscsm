@@ -1,22 +1,22 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-import { CREATE_FOOD, CREATE_PRODUCT,  graphQLClient } from "../../../graphql";
-import { CreateFood, CreateProduct, CreateSite, Food, Product, Site, UpdateSite } from "../../../interfaces";
+import { CREATE_FOOD, CREATE_PRODUCT,  graphQLClient } from "../../../../graphql";
+import { CreateFood, CreateProduct, CreateSite, Food, Product, Site, UpdateSite } from "../../../../interfaces";
 
 
-export const useCreateFood = (parentId: string) => {
+export const useCreateProductFood = (parentId: string) => {
   const queryClient = useQueryClient();
   return useMutation(
     async ({ input, type}: CreateFood) => {
-      const { createFood } = await graphQLClient.request<{ createFood: Food }>(CREATE_FOOD, {
+      const { createProductFood } = await graphQLClient.request<{ createProductFood: Food }>(CREATE_FOOD, {
         input,
         type,
       });
-      return createFood;
+      return createProductFood;
     },
     {
-      onSuccess: async (createFood) => {
-        queryClient.setQueryData<Food[]>(['find-all-foods-by-parent', parentId], (old) => [...old!, createFood]);
+      onSuccess: async (createProductFood) => {
+        queryClient.setQueryData<Food[]>(['find-all-products-food-by-parent-id', parentId], (old) => [...old!, createProductFood]);
         Swal.fire({
           position: "center",
           icon: "success",

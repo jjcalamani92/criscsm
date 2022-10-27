@@ -41,7 +41,7 @@ export const FIND_PAGES_0_WEAR = gql`
   }
 `;
 export const FIND_PAGE_0_WEAR = gql`
-  query FindPage0Wear($id:ID!) {
+  query FindPage0Wear($id:String!) {
     findPage0Wear(id:$id) {
       _id
       site

@@ -1,22 +1,19 @@
-import { useQueryClient } from '@tanstack/react-query';
+
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { createRef, FC, useRef } from 'react';
-import { useForm, Resolver, SubmitHandler } from 'react-hook-form';
-import Swal from 'sweetalert2';
-import { Food, Product } from '../../../../interfaces';
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { Food } from '../../../../interfaces';
 import { getQuery } from '../../../../utils';
-import { useCreateFood, useCreateProduct, useUpdateFood, useUpdateProduct } from '../../../hooks';
+import { useCreateProductFood, useUpdateProductFood } from '../../../hooks';
 
 
 interface FormValues {
   name: string;
-  // mark: string;
   promotion: string;
   description: string;
   price: number;
   discountPrice: number;
-  // inStock: number;
 };
 interface FoodForm {
   toggle: () => void
@@ -27,22 +24,23 @@ interface FoodForm {
 }
 export const FoodForm: FC<FoodForm> = ({ toggle, setLeft, uid, type, meal }) => {
   const { data: session } = useSession()
-
+  // console.log(meal);
+  
   const { asPath } = useRouter()
   const query = getQuery(asPath)
   // console.log(uid);
   
   const { register, handleSubmit, formState: { errors }, setValue } = useForm<FormValues>({ defaultValues: meal ? { name: meal.data.name, promotion: meal.data.promotion.href, description: meal.data.description, price: meal.data.price, discountPrice: meal.data.discountPrice } : { name: "", promotion: 'none', description: 'meal description', price: 0, discountPrice: 0} });
 
-  const { mutate: createFood } = useCreateFood(uid!)
-  const { mutate: updateFood } = useUpdateFood()
+  const { mutate: createProductFood } = useCreateProductFood(uid!)
+  const { mutate: updateProductFood } = useUpdateProductFood()
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
-    const updateForm = { ...data, name: data.name.trim(), price: Number(data.price), discountPrice: Number(data.discountPrice), uid: session?.user.sid!, change: "create meal" }
-    const form = { ...updateForm, site: query[2], parent: uid! }
+    const updateForm = { ...data, name: data.name.trim(), price: Number(data.price), discountPrice: Number(data.discountPrice), uid: session?.user.sid! }
+    const form = { ...updateForm, site: query[3], parent: uid! }
     if (meal) {
-      updateFood({ id: meal._id, input: { ...updateForm, site: query[2], parent: meal.parent }, type: meal.type })
+      updateProductFood({ id: meal._id, input: { ...updateForm, siteId: query[3], parentId: meal.parentId }, type: meal.data.type })
     } else {
-      createFood({ input: { ...updateForm, site: query[2], parent: uid! }, type: type! })
+      createProductFood({ input: { ...updateForm, siteId: query[3], parentId: uid! }, type: type! })
     }
     toggle()
   };

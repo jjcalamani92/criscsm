@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { FC, Fragment } from "react";
 import { HeaderEcommerce0, HeaderEducation0, HeaderFood, HeaderFood0, ShoppingCarts } from "../components";
 import { Main, MainEcommerce } from "../components/main";
-import { useSite } from "../hooks";
+import { useSiteFood } from "../hooks";
 
 interface LayoutPagesProyects {
 	children?: React.ReactNode;
@@ -23,7 +23,7 @@ export const LayoutPagesProyects: FC<LayoutPagesProyects> = ({
 		'image': "https://res.cloudinary.com/dqsbh2kn0/image/upload/v1663014890/zawkgpyjvvxrfwp9j7w1.jpg"
 	}
 	const [state, { toggle, setLeft, setRight }] = useToggle();
-	const { data: site } = useSite(asPath);
+	const { data: site } = useSiteFood(asPath);
 
 	return (
 		<>

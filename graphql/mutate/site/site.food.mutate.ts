@@ -18,7 +18,7 @@ export const CREATE_SITE_FOOD = gql`
   }
 `;
 export const UPDATE_SITE_FOOD = gql`
-  mutation UpdateSiteFood($id: ID!, $input: UpdateSite!) {
+  mutation UpdateSiteFood($id: String!, $input: UpdateSite!) {
     updateSiteFood(id: $id, input: $input) {
       _id
       data {
@@ -55,7 +55,7 @@ export const UPDATE_SITE_FOOD = gql`
 `;
 export const UPDATE_SITE_FOOD_IMAGE = gql`
   mutation UpdateSiteImageFood(
-    $id: ID!
+    $id: String!
     $inputImage: UpdateImage!
     $type: String!
     $uid: String!
@@ -96,7 +96,7 @@ export const UPDATE_SITE_FOOD_IMAGE = gql`
 `;
 
 export const UPDATE_SITE_FOOD_DB = gql`
-  mutation UpdateDataBaseFood($id: ID!, $inputDB: [UpdateDataBase!]!) {
+  mutation UpdateDataBaseFood($id: String!, $inputDB: [UpdateDataBase!]!) {
     updateDataBaseFood(id: $id, inputDB: $inputDB) {
       _id
       data {
@@ -132,7 +132,7 @@ export const UPDATE_SITE_FOOD_DB = gql`
   }
 `;
 export const DELETE_SITE_FOOD = gql`
-  mutation DeleteSiteFood($id: ID!) {
+  mutation DeleteSiteFood($id: String!) {
     deleteSiteFood(id: $id)
   }
 `;

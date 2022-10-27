@@ -23,7 +23,7 @@ export const findSiteWearByLayout = async (siteId:String) => {
   return findSiteWear;
 };
 
-export function useSiteByLayout(asPath: string) {
+export function useSiteByWearLayout(asPath: string) {
   const query = getQuery(asPath)
   const siteId = query[3]
   return useQuery(["find-site-wear-by-layout", siteId], () => findSiteWearByLayout(siteId!));

@@ -23,7 +23,7 @@ export const CREATE_PAGE_0_FOOD = gql`
   }
 `;
 export const UPDATE_PAGE_0_FOOD = gql`
-  mutation UpdatePage0Food($id:ID!, $input: UpdatePage!) {
+  mutation UpdatePage0Food($id:String!, $input: UpdatePage!) {
     updatePage0Food(id:$id, input: $input) {
 			_id
       siteId
@@ -44,7 +44,7 @@ export const UPDATE_PAGE_0_FOOD = gql`
   }
 `;
 export const UPDATE_IMAGE_PAGE_0_FOOD = gql`
-mutation UpdateImagePage0Food($id: ID!, $inputImage: UpdateImage!, $uid: String!) {
+mutation UpdateImagePage0Food($id: String!, $inputImage: UpdateImage!, $uid: String!) {
   updateImagePage0Food (id:$id, inputImage: $inputImage, uid:$uid) {
 			_id
       siteId
@@ -65,7 +65,7 @@ mutation UpdateImagePage0Food($id: ID!, $inputImage: UpdateImage!, $uid: String!
   }
 `;
 export const DELETE_PAGE_0_FOOD = gql`
-  mutation DeletePage0Food($id: ID!) {
+  mutation DeletePage0Food($id: String!) {
     deletePage0Food(id: $id)
   }
 `;
@@ -96,7 +96,7 @@ export const CREATE_PAGE_1_FOOD = gql`
   }
 `;
 export const UPDATE_PAGE_1_FOOD = gql`
-  mutation UpdatePage1Food($id:ID!, $input: UpdatePage!) {
+  mutation UpdatePage1Food($id:String!, $input: UpdatePage!) {
     updatePage1Food(id:$id, input: $input) {
 			_id
       siteId
@@ -117,7 +117,7 @@ export const UPDATE_PAGE_1_FOOD = gql`
   }
 `;
 export const UPDATE_IMAGE_PAGE_1_FOOD = gql`
-mutation UpdateImagePage1Food($id: ID!, $inputImage: UpdateImage!, $uid: String!) {
+mutation UpdateImagePage1Food($id: String!, $inputImage: UpdateImage!, $uid: String!) {
   updateImagePage1Food (id:$id, inputImage: $inputImage, uid:$uid) {
 			_id
       siteId
@@ -138,7 +138,7 @@ mutation UpdateImagePage1Food($id: ID!, $inputImage: UpdateImage!, $uid: String!
   }
 `;
 export const DELETE_PAGE_1_FOOD = gql`
-  mutation DeletePage1Food($id: ID!) {
+  mutation DeletePage1Food($id: String!) {
     deletePage1Food(id: $id)
   }
 `;
@@ -169,7 +169,7 @@ export const CREATE_PAGE_2_FOOD = gql`
   }
 `;
 export const UPDATE_PAGE_2_FOOD = gql`
-  mutation UpdatePage2Food($id:ID!, $input: UpdatePage!) {
+  mutation UpdatePage2Food($id:String!, $input: UpdatePage!) {
     updatePage2Food(id:$id, input: $input) {
 			_id
       siteId
@@ -190,7 +190,7 @@ export const UPDATE_PAGE_2_FOOD = gql`
   }
 `;
 export const UPDATE_IMAGE_PAGE_2_FOOD = gql`
-mutation UpdateImagePage2Food($id: ID!, $inputImage: UpdateImage!, $uid: String!) {
+mutation UpdateImagePage2Food($id: String!, $inputImage: UpdateImage!, $uid: String!) {
   updateImagePage2Food (id:$id, inputImage: $inputImage, uid:$uid) {
 			_id
       siteId
@@ -211,7 +211,7 @@ mutation UpdateImagePage2Food($id: ID!, $inputImage: UpdateImage!, $uid: String!
   }
 `;
 export const DELETE_PAGE_2_FOOD = gql`
-  mutation DeletePage2Food($id: ID!) {
+  mutation DeletePage2Food($id: String!) {
     deletePage2Food(id: $id)
   }
 `;
@@ -242,7 +242,7 @@ export const CREATE_PAGE_3_FOOD = gql`
   }
 `;
 export const UPDATE_PAGE_3_FOOD = gql`
-  mutation UpdatePage3Food($id:ID!, $input: UpdatePage!) {
+  mutation UpdatePage3Food($id:String!, $input: UpdatePage!) {
     updatePage3Food(id:$id, input: $input) {
 			_id
       siteId
@@ -263,7 +263,7 @@ export const UPDATE_PAGE_3_FOOD = gql`
   }
 `;
 export const UPDATE_IMAGE_PAGE_3_FOOD = gql`
-mutation UpdateImagePage3Food($id: ID!, $inputImage: UpdateImage!, $uid: String!) {
+mutation UpdateImagePage3Food($id: String!, $inputImage: UpdateImage!, $uid: String!) {
   updateImagePage3Food (id:$id, inputImage: $inputImage, uid:$uid) {
 			_id
       siteId
@@ -284,7 +284,7 @@ mutation UpdateImagePage3Food($id: ID!, $inputImage: UpdateImage!, $uid: String!
   }
 `;
 export const DELETE_PAGE_3_FOOD = gql`
-  mutation DeletePage3Food($id: ID!) {
+  mutation DeletePage3Food($id: String!) {
     deletePage3Food(id: $id)
   }
 `;

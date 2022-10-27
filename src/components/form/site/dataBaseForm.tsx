@@ -1,9 +1,10 @@
+import { useRouter } from 'next/router';
 import { createRef, FC, useRef, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import { Site } from '../../../../interfaces';
-import { typePageEcommerceCategory, typePageFoodCategory } from '../../../../utils';
-import { useUpdateSiteDataBaseFood } from '../../../hooks';
+import { getQuery, typePageEcommerceCategory, typePageFoodCategory } from '../../../../utils';
+import { useUpdateSiteDataBaseFood, useUpdateSiteDataBaseWear } from '../../../hooks';
 
 
 interface FormValues {
@@ -16,13 +17,17 @@ interface DataBaseForm {
 }
 export const DataBaseForm: FC<DataBaseForm> = ({ toggle, setLeft, site }) => {
   // console.log(site?.data.type);
-  
-  const { mutate: updateSiteDB } = useUpdateSiteDataBaseFood()
+  const { asPath, replace } = useRouter()
+  const query = getQuery(asPath)
+  const { mutate: updateSiteDBFood } = useUpdateSiteDataBaseFood()
+  const { mutate: updateSiteDBWear } = useUpdateSiteDataBaseWear()
   const { register, handleSubmit } = useForm<FormValues>({ defaultValues: { value: site?.data.dataBase.map(data => data.value) } });
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     const updateFormDB = data.value.map(data => ({ type: data }))
-    updateSiteDB({ id: site?._id!, inputDB: updateFormDB })
+    if (query[2] === 'food') { updateSiteDBFood({ id: site?._id!, inputDB: updateFormDB }) }
+    if (query[2] === 'wear') { updateSiteDBWear({ id: site?._id!, inputDB: updateFormDB }) }
+    // updateSiteDBFood({ id: site?._id!, inputDB: updateFormDB })
     toggle()
   };
   const cancelButtonRef = useRef(null)

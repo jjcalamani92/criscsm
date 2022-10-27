@@ -103,7 +103,7 @@ export interface UpdateProduct {
 }
 export interface UpdateProductImage {
   id:string
-  input: UpdateImage[]
+  inputImage: UpdateImage[]
   type: string
   uid: string
 }

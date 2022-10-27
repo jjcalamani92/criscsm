@@ -3,6 +3,8 @@ import { Page, Site } from "../../../../interfaces";
 import { useClickAway, useLongPress, useSelections } from 'ahooks';
 import Link from "next/link";
 import { Image } from "../../utils";
+import { useRouter } from "next/router";
+import { getQuery } from "../../../../utils";
 
 interface CardSiteProjects {
   site?: Site
@@ -11,7 +13,8 @@ interface CardSiteProjects {
   toggle: () => void
 }
 export const CardSiteProjects: FC<CardSiteProjects> = ({ site, checked, partiallySelected,  toggle }) => {
-  // const {push} = useRouter()
+  const {push, asPath} = useRouter()
+  const query = getQuery(asPath)
   const ref = useRef<HTMLDivElement>(null);
   useLongPress(toggle, ref, {
     moveThreshold: { x: 5, y: 5 },
@@ -33,7 +36,7 @@ export const CardSiteProjects: FC<CardSiteProjects> = ({ site, checked, partiall
         <Image img={site?.data.seo.image!} className="h-[12rem] w-full object-cover"/>
 
         
-        <Link href={`/dashboard/projects/${site?._id}`}>
+        <Link href={`/dashboard/projects/${query[2]}/${site?._id}`}>
           <a  className="flex items-center h-[3rem] mx-2 cursor-pointer"> 
             <h2 className=" text-sm tracking-wide truncate">{site?.data.seo.title}</h2>
           </a>

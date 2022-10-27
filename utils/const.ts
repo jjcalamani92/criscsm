@@ -1,7 +1,7 @@
 export const domains = ['.com', '.org', '.net', '.vercel.app']
 export const typeSite = [
   { label:"E-commerce", value:"ecommerce" },
-  { label:"Clothing", value:"clothing" },
+  { label:"Wear", value:"wear" },
   { label:"Education", value:"education" },
   { label:"Marketing", value:"marketing" },
   { label:"Food", value:"food" },

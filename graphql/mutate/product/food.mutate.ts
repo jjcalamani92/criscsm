@@ -1,14 +1,14 @@
 import { gql } from "graphql-request";
 
 export const CREATE_FOOD = gql`
-  mutation CreateFood($input: CreateFood!, $type: String!) {
-    createFood(input: $input, type: $type) {
+  mutation CreateProductFood($input: CreateFood!, $type: String!) {
+    createProductFood(input: $input, type: $type) {
       _id
-      site
-      parent
-      type
+      siteId
+      parentId
       data {
         name
+        type
         slug
         
         price
@@ -28,12 +28,12 @@ export const CREATE_FOOD = gql`
 `;
 
 export const UPDATE_FOOD = gql`
-  mutation UpdateFood($id: ID!, $input: UpdateFood!, $type: String!) {
-    updateFood(id: $id, input: $input, type: $type) {
+  mutation UpdateProductFood($id: String!, $input: UpdateFood!, $type: String!) {
+    updateProductFood(id: $id, input: $input, type: $type) {
       _id
-      type
-      parent
+      parentId
       data {
+        type  
         name
         slug
         
@@ -64,28 +64,28 @@ export const UPDATE_FOOD = gql`
 `;
 
 export const DELETE_FOOD = gql`
-  mutation DeleteFood($id: ID!, $type: String!) {
-    deleteFood(id: $id, type: $type)
+  mutation DeleteProductFood($id: String!, $type: String!) {
+    deleteProductFood(id: $id, type: $type)
   }
 `;
-export const DELETE_MANY_FOOD_BY_ID = gql`
-  mutation DeleteFoodsById($ids: [String!]!, $type: String!) {
-    deleteFoodsById (ids:$ids, type: $type) 
+export const DELETE_FOODS = gql`
+  mutation DeleteProductsFood($ids: [String!]!, $type: String!) {
+    deleteProductsFood (ids:$ids, type: $type) 
   }
 `;
 
-export const UPDATE_FOOD_IMAGE = gql`
-  mutation UpdateFoodImage(
-    $id: ID!
-    $input: [UpdateImage!]!
+export const UPDATE_PRODUCT_FOOD_IMAGE = gql`
+  mutation UpdateProductFoodImage(
+    $id: String!
+    $inputImage: [UpdateImage!]!
     $type: String!
     $uid: String!
   ) {
-    updateFoodImage(id: $id, input: $input, type: $type, uid: $uid) {
+    updateProductFoodImage(id: $id, inputImage: $inputImage, type: $type, uid: $uid) {
       _id
-      type
-      parent
+      parentId
       data {
+        type
         name
         slug
         price

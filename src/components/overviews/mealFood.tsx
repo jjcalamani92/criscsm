@@ -21,6 +21,7 @@ interface MealFood {
 }
 
 export const MealFood: FC<MealFood> = ({ meal }) => {
+  console.log(meal);
   
   return (
     <>

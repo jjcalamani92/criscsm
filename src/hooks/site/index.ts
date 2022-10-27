@@ -1,6 +1,5 @@
 
 
-export * from './wear/useSiteWear'
 
 
 export * from './wear'

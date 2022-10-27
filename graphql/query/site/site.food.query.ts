@@ -54,7 +54,7 @@ export const FIND_SITES_FOOD = gql`
 `;
 
 export const FIND_SITE_FOOD = gql`
-  query FindSiteFood($id: ID!) {
+  query FindSiteFood($id: String!) {
     findSiteFood(id: $id) {
       _id
       data {
@@ -91,15 +91,49 @@ export const FIND_SITE_FOOD = gql`
   }
 `;
 export const FIND_SITE_FOOD_BY_LAYOUT = gql`
-  query FindSiteFood($id: ID!) {
+  query FindSiteFood($id: String!) {
     findSiteFood(id: $id) {
       _id
+      page{
+        _id
+        data {
+          type
+          seo {
+            title
+            href
+          }
+        }
+        page{
+          _id
+          data {
+            type
+            seo {
+              title
+              href
+            }
+          }
+          product{
+            _id
+            data{
+              seo{
+                title
+                href
+                image{
+                  src
+                  alt
+                }
+              }
+            }
+          }
+        }
+      }
       data {
         name
         description
         seo {
           title
           description
+          href
         }
 
         
