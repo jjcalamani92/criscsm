@@ -1,6 +1,6 @@
 import { FC, useState, Fragment, useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { useAllProductsByParent, usePage0, usePage2, usePages0ByParent, usePages1ByParent, usePages3ByParent, useProductsByParent, useSite } from '../../hooks';
+import { useAllProductsByParent, usePage0, usePage2, usePages0ByParent, usePages1ByParent, usePages3ByParent, useProductsByParent } from '../../hooks';
 import { CardPage1, CardPage2, CardPage3, CardProduct } from '../card';
 import { Grid, Products } from '../grid';
 import { HeadingDashboard } from '../heading';
