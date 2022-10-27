@@ -13,7 +13,7 @@ export const useCreatePage3 = () => {
     },
     {
       onSuccess: async (createPage3) => {
-        const parentId = createPage3.parent
+        const parentId = createPage3.parentId
         queryClient.setQueryData<Page[]>(["find-pages3-by-parent", parentId], (old) => [...old!, createPage3]);
       },
       onError: (error) => {

@@ -17,7 +17,7 @@ export const useCreatePage1 = () => {
     },
     {
       onSuccess: async (createPage1) => {
-        const parentId = createPage1.parent;
+        const parentId = createPage1.parentId;
         queryClient.setQueryData<Page[]>(
           ["find-pages1-by-parent", parentId],
           (old) => [...old!, createPage1]

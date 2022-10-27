@@ -6,16 +6,16 @@ import { Page, Site, UpdateImagePage, UpdateSiteImage } from "../../../../interf
 export const useUpdatePage0Image = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async ({id, input, uid}:UpdateImagePage) => {
+    async ({id, inputImage, uid}:UpdateImagePage) => {
       const { updateImagePage0 } = await graphQLClient.request<{ updateImagePage0:Page }>(UPDATE_IMAGE_PAGE_0, {
         id,
-        input,
+        inputImage,
         uid,
       });
       return updateImagePage0;
     },
     {
-      onSuccess: async (updateImagePage0, {id, input}) => {
+      onSuccess: async (updateImagePage0, {id}) => {
         const pageId = id
         queryClient.setQueryData(['find-page0', pageId], updateImagePage0);
       },

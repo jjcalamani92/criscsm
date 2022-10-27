@@ -14,7 +14,7 @@ export const useCreatePage0 = () => {
     },
     {
       onSuccess: async (createPage0) => {
-        const parentId = createPage0.parent
+        const parentId = createPage0.parentId
         queryClient.setQueryData<Page[]>(["find-pages0-by-parent", parentId], (old) => [...old!, createPage0]);
         Swal.fire({
           position: "center",
