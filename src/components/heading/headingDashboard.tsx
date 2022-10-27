@@ -83,7 +83,7 @@ export const HeadingDashboard: FC<HeadingDashboard> = ({ title, page, site, prod
       setChildren(<TabFormProduct toggle={toggle} setLeft={setLeft} type={product?.type} product={product}/>)
     } else if (type === "meal") {
       toggle()
-      setChildren(<TabFormFood toggle={toggle} setLeft={setLeft} type={meal?.type} meal={meal}/>)
+      setChildren(<TabFormFood toggle={toggle} setLeft={setLeft} type={meal?.data.type} meal={meal}/>)
     }
   }
   const addHandle = (type: string) => {
