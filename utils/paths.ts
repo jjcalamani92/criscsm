@@ -6,7 +6,7 @@ export const getPathByProduct = (products: Product[], asPath:string) =>
 getPathByProducts(products).map((data) => data.asPath).find(data => data === asPath);
 
 export const getPathByFoods = (foods: Food[]) =>
-foods.map((data) => ({asPath:`/dashboard/sites/${data.site}/meal/${data.type}=${data._id}`, seo: data.data.seo}));
+foods.map((data) => ({asPath:`/dashboard/sites/${data.siteId}/meal/${data.data.type}=${data._id}`, seo: data.data.seo}));
 export const getPathByFood = (foods: Food[], asPath:string) =>
 getPathByFoods(foods).map((data) => data.asPath).find(data => data === asPath);
 
@@ -36,16 +36,16 @@ export const getPathBySite = (sites: Site[], asPath:string) =>
 getPathBySites(sites).map((data) => data.asPath).find(data => data === asPath);
 
 export const getPathByPages0 = (pages0: Page[]) =>
-pages0.map((data) => ({asPath:`/dashboard/sites/${data.site}/page0=${data._id}`, seo: data.data.seo}));
+pages0.map((data) => ({asPath:`/dashboard/sites/${data.siteId}/page0=${data._id}`, seo: data.data.seo}));
 export const getPathByPage0 = (pages0: Page[], asPath:string) =>
 getPathByPages0(pages0).map((data) => data.asPath).find(data => data === asPath);
 
 export const getPathByPages1 = (pages1: Page[]) =>
-pages1.map((data) => ({asPath:`/dashboard/sites/${data.site}/page1=${data._id}`, seo: data.data.seo}));
+pages1.map((data) => ({asPath:`/dashboard/sites/${data.siteId}/page1=${data._id}`, seo: data.data.seo}));
 export const getPathByPage1 = (pages1: Page[], asPath:string) =>
 getPathByPages1(pages1).map((data) => data.asPath).find(data => data === asPath);
 
 export const getPathByPages2 = (pages1: Page[]) =>
-pages1.map((data) => ({asPath:`/dashboard/sites/${data.site}/page2=${data._id}`, seo: data.data.seo}));
+pages1.map((data) => ({asPath:`/dashboard/sites/${data.siteId}/page2=${data._id}`, seo: data.data.seo}));
 export const getPathByPage2 = (pages1: Page[], asPath:string) =>
 getPathByPages2(pages1).map((data) => data.asPath).find(data => data === asPath);
