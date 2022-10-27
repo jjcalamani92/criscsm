@@ -55,7 +55,7 @@ export const ImageForm: FC<ImageForm> = ({ toggle, setLeft, product, image }) =>
 
         const { data } = await axios.post(`${process.env.API_URL}/upload/file`, formData)
         setValue('data.image', [...getValues('data.image'), {uid: uuidv3(), src: data.url, alt:`description image of the ${product?.data.name}`}], { shouldValidate: true })
-        updateProductImage({id: product?._id!, input: getValues('data.image'), type: product?.type!, uid: session?.user.sid!})
+        updateProductImage({id: product?._id!, inputImage: getValues('data.image'), type: product?.type!, uid: session?.user.sid!})
 
       }
     } catch (error) {
@@ -74,7 +74,7 @@ export const ImageForm: FC<ImageForm> = ({ toggle, setLeft, product, image }) =>
   
   const deleteImage = async (src: string) => {
     setValue('data.image', getValues('data.image').filter(data => data.src !== src), { shouldValidate: true } )
-    updateProductImage({id: product?._id!, input: getValues('data.image'), type: product?.type!, uid: session?.user.sid!})
+    updateProductImage({id: product?._id!, inputImage: getValues('data.image'), type: product?.type!, uid: session?.user.sid!})
     const url = src.split('/').at(-1)?.split('.').at(-2)
         await axios.post(`${process.env.API_URL}/upload/delete`, {name: url, type: `products-${product?.type}`} )
   }
@@ -94,7 +94,7 @@ if (url) {
   try {
     const { data } = await axios.post(`${process.env.API_URL}/upload/file-url`, {file: url, siteId: query[2], parentId: product?._id, type: `products-${product?.type}`})
     setValue('data.image', [...getValues('data.image'), { uid: uuidv3(), src: data.url, alt: `description image of the ${product?.data.name}` }], { shouldValidate: true })
-    updateProductImage({ id: product?._id!, input: getValues('data.image'), type: product?.type!, uid: session?.user.sid! })
+    updateProductImage({ id: product?._id!, inputImage: getValues('data.image'), type: product?.type!, uid: session?.user.sid! })
   } catch (error) {
     const err = error as AxiosError
     const { message } = err.response?.data as { message: string }
