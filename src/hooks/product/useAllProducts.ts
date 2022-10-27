@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { FIND_ALL_PRODUCTS } from "../../../graphql";
 import { graphQLClient } from "../../../graphql/graphQLClient";
-import { FIND_SITES } from "../../../graphql/query/site/site.wear.query";
 import { Product } from "../../../interfaces";
 import { Site } from "../../../interfaces/site.interface";
 

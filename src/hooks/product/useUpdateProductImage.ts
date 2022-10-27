@@ -6,17 +6,17 @@ import { Product, Site, UpdateProductImage, UpdateSite } from "../../../interfac
 export const useUpdateProductImage = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async ({id, input, type, uid}:UpdateProductImage) => {
+    async ({id, inputImage, type, uid}:UpdateProductImage) => {
       const { updateProductImage } = await graphQLClient.request<{updateProductImage: Product}>(UPDATE_PRODUCT_IMAGE, {
         id,
-        input,
+        inputImage,
         type,
         uid,
       });
       return updateProductImage;
     },
     {
-      onSuccess: async (updateProductImage, {id, input, type}) => {
+      onSuccess: async (updateProductImage, {id, inputImage, type}) => {
         // const siteId = id
         // queryClient.invalidateQueries([`find-site`]);
         queryClient.setQueryData(['find-product', id, type], updateProductImage);
