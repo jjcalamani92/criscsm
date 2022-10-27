@@ -10,7 +10,7 @@ interface CardPage3 {
 }
 export const CardPage3: FC<CardPage3> = ({ page }) => {
   
-  const { mutate: deletePage3 } = useDeletePage3(page?.parent!)
+  const { mutate: deletePage3 } = useDeletePage3(page?.parentId!)
   const onDelete = (id:string) => {
     Swal.fire({
 			title: 'Are you sure?',
@@ -35,7 +35,7 @@ export const CardPage3: FC<CardPage3> = ({ page }) => {
   }
   return (
     <div className="max-w-xs rounded-md shadow-lg bg-gray-50 text-gray-800">
-      <Link href={`/dashboard/sites/${page?.site}/page2=${page?._id}`}>
+      <Link href={`/dashboard/sites/${page?.siteId}/page2=${page?._id}`}>
         <a>
           <Image img={page?.data.seo.image!} className={"h-[12rem] w-full object-cover"}/>
 

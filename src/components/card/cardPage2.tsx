@@ -29,7 +29,7 @@ export const CardPage2: FC<CardPage2> = ({ page, checked, partiallySelected, tog
       <div ref={ref} className="">
         <Image img={page?.data.seo.image!} className={"h-[12rem] w-full object-cover"}/>
 
-        <Link href={`/dashboard/sites/${page?.site}/page2/${page?._id}`}>
+        <Link href={`/dashboard/sites/${page?.siteId}/page2/${page?._id}`}>
 
 
           <a className="flex items-center h-[3rem] mx-2 cursor-pointer">
